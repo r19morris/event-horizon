@@ -1,0 +1,356 @@
+{
+  "paris": {
+    "restaurants": [
+      {
+        "name": "Le Comptoir du Relais",
+        "cuisine": "French Bistro",
+        "price": "$$",
+        "rating": 4.5,
+        "description": "Classic Parisian bistro serving traditional French dishes. Famous for their duck confit and coq au vin.",
+        "location": "9 Carrefour de l'Od\u00e9on, 75006",
+        "booking_url": "https://opentable.com/le-comptoir",
+        "dietary": [
+          "vegetarian options available"
+        ]
+      },
+      {
+        "name": "Breizh Caf\u00e9",
+        "cuisine": "Cr\u00eaperie",
+        "price": "$$",
+        "rating": 4.7,
+        "description": "Authentic Breton cr\u00eapes and galettes. Try the complete galette with ham, cheese, and egg.",
+        "location": "109 Rue Vieille du Temple, 75003",
+        "booking_url": "https://opentable.com/breizh",
+        "dietary": [
+          "gluten-free options",
+          "vegetarian"
+        ]
+      },
+      {
+        "name": "Septime",
+        "cuisine": "Contemporary French",
+        "price": "$$$",
+        "rating": 4.8,
+        "description": "Michelin-starred restaurant with innovative seasonal menu. Book months in advance.",
+        "location": "80 Rue de Charonne, 75011",
+        "booking_url": "https://opentable.com/septime",
+        "dietary": [
+          "vegetarian tasting menu available"
+        ]
+      },
+      {
+        "name": "L'As du Fallafel",
+        "cuisine": "Middle Eastern",
+        "price": "$",
+        "rating": 4.6,
+        "description": "Best falafel in Paris. Always a line but moves fast. Cash only.",
+        "location": "34 Rue des Rosiers, 75004",
+        "dietary": [
+          "vegetarian",
+          "vegan"
+        ]
+      }
+    ],
+    "attractions": [
+      {
+        "name": "Eiffel Tower",
+        "type": "landmark",
+        "rating": 4.6,
+        "description": "Iconic iron lattice tower. Visit at sunset for best views. Book tickets online to skip lines.",
+        "duration_minutes": 120,
+        "cost": 26.0,
+        "tips": [
+          "Book online in advance",
+          "Visit early morning or evening",
+          "Bring a jacket - windy at top"
+        ],
+        "categories": [
+          "photography",
+          "sightseeing",
+          "romantic"
+        ]
+      },
+      {
+        "name": "Louvre Museum",
+        "type": "museum",
+        "rating": 4.7,
+        "description": "World's largest art museum. Home to Mona Lisa and Venus de Milo. Impossible to see everything in one day.",
+        "duration_minutes": 180,
+        "cost": 17.0,
+        "tips": [
+          "Buy tickets online",
+          "Enter through less crowded entrances",
+          "Visit Wednesday or Friday evening",
+          "Don't try to see everything"
+        ],
+        "categories": [
+          "art",
+          "culture",
+          "indoor"
+        ]
+      },
+      {
+        "name": "Montmartre & Sacr\u00e9-C\u0153ur",
+        "type": "neighborhood",
+        "rating": 4.8,
+        "description": "Charming hilltop neighborhood with artists, cafes, and stunning basilica. Great views of Paris.",
+        "duration_minutes": 150,
+        "cost": 0,
+        "tips": [
+          "Wear comfortable shoes",
+          "Visit in morning for fewer crowds",
+          "Explore side streets",
+          "Watch for pickpockets"
+        ],
+        "categories": [
+          "walking",
+          "photography",
+          "culture"
+        ]
+      },
+      {
+        "name": "Seine River Cruise",
+        "type": "activity",
+        "rating": 4.4,
+        "description": "Hour-long boat tour past major landmarks. Relaxing way to see the city.",
+        "duration_minutes": 60,
+        "cost": 15.0,
+        "tips": [
+          "Evening cruises are more romantic",
+          "Sit on upper deck",
+          "Bring a light jacket"
+        ],
+        "categories": [
+          "sightseeing",
+          "relaxation",
+          "romantic"
+        ]
+      }
+    ],
+    "events": [
+      {
+        "name": "Jazz at Sunset - Parc de la Villette",
+        "date": "2025-06-15",
+        "time": "19:00",
+        "venue": "Parc de la Villette",
+        "description": "Free outdoor jazz concert series. Bring a picnic blanket.",
+        "cost": 0,
+        "categories": [
+          "music",
+          "outdoor",
+          "free"
+        ]
+      }
+    ],
+    "tips": [
+      "Metro is fastest way to get around. Buy a carnet (10 tickets) for savings.",
+      "Most museums closed on Mondays or Tuesdays. Check before going.",
+      "Restaurants serve lunch 12-2pm, dinner after 7:30pm. Plan accordingly.",
+      "Many places close in August when locals take vacation.",
+      "Learn basic French phrases - locals appreciate the effort."
+    ]
+  },
+  "tokyo": {
+    "restaurants": [
+      {
+        "name": "Ichiran Ramen",
+        "cuisine": "Ramen",
+        "price": "$",
+        "rating": 4.5,
+        "description": "Famous tonkotsu ramen chain with individual booths for focused eating experience.",
+        "location": "Shibuya, multiple locations",
+        "dietary": [
+          "pork-free options available"
+        ]
+      },
+      {
+        "name": "Tsukiji Outer Market",
+        "cuisine": "Seafood",
+        "price": "$$",
+        "rating": 4.7,
+        "description": "Fresh sushi and street food near old fish market. Visit early morning for best selection.",
+        "location": "Tsukiji, Chuo City",
+        "dietary": [
+          "many vegetarian options"
+        ]
+      },
+      {
+        "name": "Sukiyabashi Jiro",
+        "cuisine": "Sushi",
+        "price": "$$$$",
+        "rating": 4.9,
+        "description": "3-Michelin star sushi. Featured in Jiro Dreams of Sushi. Book months ahead.",
+        "location": "Ginza",
+        "booking_url": "https://booking.com/jiro",
+        "dietary": [
+          "no vegetarian options"
+        ]
+      }
+    ],
+    "attractions": [
+      {
+        "name": "Senso-ji Temple",
+        "type": "temple",
+        "rating": 4.6,
+        "description": "Tokyo's oldest temple in Asakusa. Beautiful traditional architecture and shopping street.",
+        "duration_minutes": 90,
+        "cost": 0,
+        "tips": [
+          "Visit early morning to avoid crowds",
+          "Try fortune telling",
+          "Shop on Nakamise Street"
+        ],
+        "categories": [
+          "culture",
+          "photography",
+          "free"
+        ]
+      },
+      {
+        "name": "teamLab Borderless",
+        "type": "museum",
+        "rating": 4.8,
+        "description": "Immersive digital art museum. Stunning interactive installations.",
+        "duration_minutes": 120,
+        "cost": 35.0,
+        "tips": [
+          "Book tickets weeks in advance",
+          "Wear comfortable shoes",
+          "Best in evening"
+        ],
+        "categories": [
+          "art",
+          "indoor",
+          "photography"
+        ]
+      },
+      {
+        "name": "Shibuya Crossing",
+        "type": "landmark",
+        "rating": 4.5,
+        "description": "World's busiest pedestrian crossing. Best viewed from Starbucks above.",
+        "duration_minutes": 30,
+        "cost": 0,
+        "tips": [
+          "Visit at night when lit up",
+          "Watch from above first",
+          "Peak times more impressive"
+        ],
+        "categories": [
+          "photography",
+          "sightseeing",
+          "free"
+        ]
+      }
+    ],
+    "events": [],
+    "tips": [
+      "Get a Suica/Pasmo card for trains and convenience stores.",
+      "Tokyo is huge - focus on 2-3 neighborhoods per day.",
+      "Many restaurants have English menus or picture menus.",
+      "Cash is still king - have yen on hand.",
+      "Trains stop around midnight - plan accordingly."
+    ]
+  },
+  "new york": {
+    "restaurants": [
+      {
+        "name": "Joe's Pizza",
+        "cuisine": "Pizza",
+        "price": "$",
+        "rating": 4.5,
+        "description": "Classic NY slice. Simple, delicious, no frills. Cash only.",
+        "location": "7 Carmine St, Greenwich Village",
+        "dietary": [
+          "vegetarian"
+        ]
+      },
+      {
+        "name": "Katz's Delicatessen",
+        "cuisine": "Deli",
+        "price": "$$",
+        "rating": 4.6,
+        "description": "Legendary Jewish deli since 1888. Famous pastrami sandwich. When Harry Met Sally filmed here.",
+        "location": "205 E Houston St",
+        "dietary": [
+          "some vegetarian options"
+        ]
+      },
+      {
+        "name": "Momofuku Noodle Bar",
+        "cuisine": "Asian Fusion",
+        "price": "$$",
+        "rating": 4.4,
+        "description": "David Chang's famous ramen spot. Try the pork buns.",
+        "location": "171 1st Ave, East Village",
+        "dietary": [
+          "limited vegetarian options"
+        ]
+      }
+    ],
+    "attractions": [
+      {
+        "name": "Central Park",
+        "type": "park",
+        "rating": 4.8,
+        "description": "Massive urban park. Walk, bike, or just relax. Different areas have different vibes.",
+        "duration_minutes": 180,
+        "cost": 0,
+        "tips": [
+          "Rent a bike",
+          "Visit Bethesda Fountain",
+          "Check out Strawberry Fields"
+        ],
+        "categories": [
+          "outdoor",
+          "walking",
+          "free"
+        ]
+      },
+      {
+        "name": "Metropolitan Museum of Art",
+        "type": "museum",
+        "rating": 4.7,
+        "description": "One of world's greatest art museums. Could spend days here.",
+        "duration_minutes": 180,
+        "cost": 30.0,
+        "tips": [
+          "Suggested admission - pay what you wish",
+          "Visit rooftop garden",
+          "Egyptian wing is must-see"
+        ],
+        "categories": [
+          "art",
+          "culture",
+          "indoor"
+        ]
+      },
+      {
+        "name": "Brooklyn Bridge Walk",
+        "type": "activity",
+        "rating": 4.6,
+        "description": "Walk across iconic bridge from Manhattan to Brooklyn. Great views.",
+        "duration_minutes": 45,
+        "cost": 0,
+        "tips": [
+          "Go early morning for fewer tourists",
+          "Walk back for different views",
+          "Explore DUMBO after"
+        ],
+        "categories": [
+          "walking",
+          "photography",
+          "free"
+        ]
+      }
+    ],
+    "events": [],
+    "tips": [
+      "Subway is 24/7 and cheapest way around. Get unlimited MetroCard.",
+      "Walk between neighborhoods - distances are smaller than they seem.",
+      "Avoid Times Square unless you want crowds and overpriced food.",
+      "Free ferries give great views of Statue of Liberty.",
+      "Brunch is a religion here - expect waits on weekends."
+    ]
+  }
+}

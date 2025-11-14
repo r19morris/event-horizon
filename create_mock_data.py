@@ -342,20 +342,17 @@ def index_mock_data():
     
     # Import here to avoid issues if not installed yet
     try:
-        from langchain_openai import OpenAIEmbeddings
         from langchain_community.vectorstores import Chroma
-        import os
+        from langchain_community.embeddings import HuggingFaceEmbeddings
+
+        embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
     except ImportError:
-        print("❌ Missing dependencies. Run: pip install -r requirements.txt")
+        print("❌ Missing dependencies. Run: pip install langchain-community sentence-transformers chromadb")
         return
     
-    # Check for API key
-    if not os.getenv('OPENAI_API_KEY'):
-        print("❌ OPENAI_API_KEY not set. Add to .env file or export OPENAI_API_KEY=...")
-        return
     
     # Initialize embeddings
-    embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+    # embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
     
     # Collect all documents
     all_documents = []
