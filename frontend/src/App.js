@@ -9,8 +9,12 @@ import {
   Clock,
   UtensilsCrossed,
   BedDouble,
-  Ticket
+  Ticket,
+  Music2,
+  Bus,
+  Info
 } from 'lucide-react';
+import { sampleLaItinerarySeed } from './sampleLaItinerary';
 
 function App() {
   const [formData, setFormData] = useState({
@@ -18,7 +22,7 @@ function App() {
     destination: '',
     startDate: '',
     endDate: '',
-    people: '1',
+    people: '2',
     constraints: '',
   });
 
@@ -50,7 +54,8 @@ function App() {
       return;
     }
 
-    const generated = buildItinerary(formData);
+    // Pretend this came from the Claude + booking backend
+    const generated = buildItineraryFromSeed(sampleLaItinerarySeed, formData);
     setItinerary(generated);
     setActiveTab('overview');
   };
@@ -83,7 +88,7 @@ function App() {
 
   return (
     <div className="app">
-      {/* HEADER + FAKE ACCOUNT / HISTORY BANNER */}
+      {/* HEADER */}
       <header className="app-header">
         <div className="header-left">
           <div className="logo-badge">
@@ -91,13 +96,13 @@ function App() {
           </div>
           <div>
             <h1>Event Horizon</h1>
-            <p>the intelligent architect of your travel</p>
+            <p>“the intelligent architect of your travel experience”</p>
           </div>
         </div>
 
         <div className="header-right">
           <div className="trip-history">
-            <span className="chip chip-muted">Last trip: New York → London</span>
+            <span className="chip chip-muted">Last trip: Paris → Lisbon</span>
             <span className="chip chip-muted">Total trips planned: 7</span>
           </div>
           <div className="profile-pill">
@@ -112,8 +117,9 @@ function App() {
         </div>
       </header>
 
+      {/* MAIN */}
       <main className="app-main">
-        {/* LEFT: INPUT FORM */}
+        {/* LEFT: FORM */}
         <section className="card card-form">
           <div className="card-title-with-icon">
             <div className="icon-circle">
@@ -122,8 +128,8 @@ function App() {
             <div>
               <h2>Trip Setup</h2>
               <p className="subtitle">
-                Answer 4 key questions and optionally add constraints. In the full product, Claude would use this
-                to deep-fill reservations and logistics.
+                Answer 4 key questions and optionally add constraints.
+                For the demo, the AI returns a pop-culture itinerary for Los Angeles.
               </p>
             </div>
           </div>
@@ -155,7 +161,7 @@ function App() {
                 name="destination"
                 value={formData.destination}
                 onChange={handleChange}
-                placeholder="e.g., Tokyo"
+                placeholder="e.g., Los Angeles"
               />
             </label>
 
@@ -236,7 +242,7 @@ function App() {
           </form>
         </section>
 
-        {/* RIGHT: ITINERARY OUTPUT + TABS */}
+        {/* RIGHT: ITINERARY + TABS */}
         <section className="card card-output">
           <div className="card-title-with-icon">
             <div className="icon-circle icon-circle-secondary">
@@ -245,12 +251,12 @@ function App() {
             <div>
               <h2>Itinerary</h2>
               <p className="subtitle">
-                High-level plan plus future detail views for flights, hotels, events, and food.
+                Calendar-style overview plus focused views for flights, hotels, events, and food.
               </p>
             </div>
           </div>
 
-          {/* Decorative tabs (non-functional backend, but clickable in UI) */}
+          {/* Tabs */}
           <div className="tab-row">
             <button
               type="button"
@@ -304,22 +310,23 @@ function App() {
             </button>
           </div>
 
+          {/* No itinerary yet */}
           {!itinerary && (
             <div className="placeholder">
               <p>
                 Fill in the trip details on the left and click <strong>Generate itinerary</strong>.
               </p>
               <ul>
-                <li>See a day-by-day plan</li>
-                <li>Logistics summary (travel &amp; lodging)</li>
-                <li>Future tabs for deep booking details via Claude</li>
+                <li>Overview shows a calendar-style timeline</li>
+                <li>Other tabs show how the agent deep-fills flights, hotels, events, and food</li>
+                <li>Seed data simulates a Claude-powered itinerary for Los Angeles</li>
               </ul>
             </div>
           )}
 
+          {/* OVERVIEW TAB */}
           {itinerary && activeTab === 'overview' && (
             <>
-              {/* Summary */}
               <div className="summary">
                 <h3>Trip overview</h3>
                 <p>
@@ -336,28 +343,59 @@ function App() {
                 )}
               </div>
 
-              {/* Logistics */}
               <div className="logistics">
-                <h3>Logistics (mocked suggestions)</h3>
-                <ul>
-                  <li>
-                    ✈️ <strong>Flights:</strong> Aim for arrival in {itinerary.destination} by the afternoon of{' '}
-                    {itinerary.startDate}. In production, Claude would choose and book specific options.
-                  </li>
-                  <li>
-                    🏨 <strong>Accommodation:</strong> Stay near the central area of {itinerary.destination} to
-                    minimize local travel time.
-                  </li>
-                  <li>
-                    🚍 <strong>Local transport:</strong> Mix of public transit and short rideshares. Walk when
-                    possible to explore.
-                  </li>
-                </ul>
+                <h3>Logistics (agent-generated)</h3>
+                <div className="logistics-row">
+                  <div className="logistics-icon">
+                    <Plane size={16} />
+                  </div>
+                  <div className="logistics-text">
+                    <strong>Flights</strong>
+                    <p>
+                      In the full system, the Claude agent selects and books flight options that align with your
+                      origin, dates, and constraints.
+                    </p>
+                  </div>
+                </div>
+                <div className="logistics-row">
+                  <div className="logistics-icon">
+                    <BedDouble size={16} />
+                  </div>
+                  <div className="logistics-text">
+                    <strong>Accommodation</strong>
+                    <p>
+                      Focused around West Hollywood to balance nightlife, studio visits, and coastal access with
+                      minimal intra-city travel.
+                    </p>
+                  </div>
+                </div>
+                <div className="logistics-row">
+                  <div className="logistics-icon">
+                    <Music2 size={16} />
+                  </div>
+                  <div className="logistics-text">
+                    <strong>Experience theme</strong>
+                    <p>
+                      Pop-culture, music history, and iconic LA food experiences tailored to your preferences.
+                    </p>
+                  </div>
+                </div>
+                <div className="logistics-row">
+                  <div className="logistics-icon">
+                    <Bus size={16} />
+                  </div>
+                  <div className="logistics-text">
+                    <strong>Ground transport</strong>
+                    <p>
+                      Mix of rideshare, walking, and light public transit; the agent can auto-insert transfer times
+                      into the schedule.
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              {/* Daily plan */}
               <div className="days">
-                <h3>Day-by-day plan</h3>
+                <h3>Calendar-style daily plan</h3>
                 {itinerary.days.map((day) => (
                   <div key={day.date} className="day-card">
                     <div className="day-header">
@@ -369,31 +407,198 @@ function App() {
                         <li key={index}>
                           <span className="time">{act.time}</span>
                           <span className="title">{act.title}</span>
-                          {act.note && <span className="note"> – {act.note}</span>}
+                          {act.location && (
+                            <span className="note"> – {act.location}</span>
+                          )}
                         </li>
                       ))}
                     </ul>
                   </div>
                 ))}
               </div>
+
+              {itinerary.tips && (
+                <div className="summary tips-block">
+                  <div className="tips-header">
+                    <Info size={16} />
+                    <h3>Smart tips from the agent</h3>
+                  </div>
+                  <ul>
+                    {itinerary.tips.map((tip, i) => (
+                      <li key={i}>{tip}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </>
           )}
 
-          {itinerary && activeTab !== 'overview' && (
-            <div className="placeholder secondary">
-              <p>
-                <strong>{tabLabel(activeTab)}</strong> will be powered by the Claude agent and live travel APIs
-                in the full version.
-              </p>
-              <p className="hint">
-                In this hackathon prototype, these tabs are decorative UI to illustrate how deep booking details
-                would be organized.
-              </p>
+          {/* FLIGHTS TAB */}
+          {itinerary && activeTab === 'flights' && (
+            <div className="tab-section">
+              <div className="tab-section-header">
+                <Plane size={16} />
+                <div>
+                  <h3>Flight plan</h3>
+                  <p>Outbound and return segments with smart deep links to booking providers.</p>
+                </div>
+              </div>
+              <div className="card-grid">
+                {itinerary.flights.map((flight) => (
+                  <div key={flight.id} className="subcard flight-card">
+                    <div className="subcard-header">
+                      <span className="pill-label">{flight.label}</span>
+                      <span className="pill-muted">{flight.airline}</span>
+                    </div>
+                    <div className="flight-main">
+                      <span className="flight-city">
+                        {flight.origin}
+                      </span>
+                      <span className="flight-arrow" />
+                      <span className="flight-city">
+                        {flight.destination}
+                      </span>
+                    </div>
+                    <div className="flight-meta">
+                      <span>{flight.date}</span>
+                      <span>
+                        {flight.departTime} – {flight.arriveTime}
+                      </span>
+                    </div>
+                    <a
+                      href={flight.deepLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link-button"
+                    >
+                      Open in Google Flights
+                    </a>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
+
+          {/* HOTELS TAB */}
+          {itinerary && activeTab === 'hotels' && (
+            <div className="tab-section">
+              <div className="tab-section-header">
+                <BedDouble size={16} />
+                <div>
+                  <h3>Hotel reservations</h3>
+                  <p>Stays that match your neighborhood preferences and trip duration.</p>
+                </div>
+              </div>
+              <div className="card-grid">
+                {itinerary.hotels.map((hotel, i) => (
+                  <div key={i} className="subcard hotel-card">
+                    <div className="subcard-header">
+                      <span className="pill-label">{hotel.name}</span>
+                      <span className="pill-muted">{hotel.area}</span>
+                    </div>
+                    <div className="hotel-meta">
+                      <span>{hotel.rating}★ guest rating</span>
+                      <span>
+                        {hotel.nights} nights · ~${hotel.pricePerNight}/night
+                      </span>
+                    </div>
+                    <a
+                      href={hotel.deepLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link-button"
+                    >
+                      View on Booking.com
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* EVENTS TAB */}
+          {itinerary && activeTab === 'events' && (
+            <div className="tab-section">
+              <div className="tab-section-header">
+                <Ticket size={16} />
+                <div>
+                  <h3>Events & experiences</h3>
+                  <p>Music venues, museums, studios, and iconic LA pop-culture stops.</p>
+                </div>
+              </div>
+              <div className="list-block">
+                {itinerary.events.map((ev, i) => (
+                  <div key={i} className="row-block">
+                    <div className="row-time">
+                      <Calendar size={12} />
+                      <span>{ev.date}</span>
+                      <span className="dot" />
+                      <span>{ev.time}</span>
+                    </div>
+                    <div className="row-main">
+                      <div className="row-title">{ev.activity}</div>
+                      <div className="row-sub">
+                        <MapPin size={12} />
+                        <span>{ev.location}</span>
+                      </div>
+                      <p className="row-desc">{ev.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* FOOD TAB */}
+          {itinerary && activeTab === 'food' && (
+            <div className="tab-section">
+              <div className="tab-section-header">
+                <UtensilsCrossed size={16} />
+                <div>
+                  <h3>Food & restaurants</h3>
+                  <p>Curated cafes, brunch spots, and dinner locations along your route.</p>
+                </div>
+              </div>
+              <div className="list-block">
+                {itinerary.food.map((spot, i) => (
+                  <div key={i} className="row-block">
+                    <div className="row-time">
+                      <Calendar size={12} />
+                      <span>{spot.date}</span>
+                      <span className="dot" />
+                      <span>{spot.time}</span>
+                    </div>
+                    <div className="row-main">
+                      <div className="row-title">{spot.activity}</div>
+                      <div className="row-sub">
+                        <MapPin size={12} />
+                        <span>{spot.location}</span>
+                      </div>
+                      <p className="row-desc">
+                        {spot.description} · <span className="row-price">~${spot.cost}</span>
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Fallback (shouldn't normally show) */}
+          {itinerary &&
+            activeTab !== 'overview' &&
+            !['flights', 'hotels', 'events', 'food'].includes(activeTab) && (
+              <div className="placeholder secondary">
+                <p>
+                  <strong>{tabLabel(activeTab)}</strong> will be powered by the Claude agent and live travel APIs
+                  in the full version.
+                </p>
+              </div>
+            )}
         </section>
       </main>
 
+      {/* FOOTER */}
       <footer className="app-footer">
         <span>Hackathon prototype – frontend only, wrapping a future Claude travel agent backend.</span>
       </footer>
@@ -401,106 +606,114 @@ function App() {
   );
 }
 
-// ---- Simple mock “AI” itinerary generator (pure frontend) ----
-
-function buildItinerary(formData) {
+/**
+ * Transform the LA seed JSON + user input into the itinerary shape
+ * the UI expects. This is pretending to be the Claude + booking layer.
+ */
+function buildItineraryFromSeed(seed, formData) {
   const { origin, destination, startDate, endDate, people, constraints } = formData;
 
-  const start = new Date(startDate);
-  const end = new Date(endDate);
+  // Days / calendar
+  const days = seed.daily_plans.map((day) => ({
+    dayNumber: day.day_number,
+    date: day.date,
+    activities: day.items.map((item) => ({
+      time: item.time,
+      title: item.activity,
+      location: item.location,
+      note: item.description,
+      cost: item.cost
+    }))
+  }));
 
-  const days = [];
-  let current = new Date(start);
+  // Flatten items for events/food
+  const allItems = seed.daily_plans.flatMap((day) =>
+    day.items.map((item) => ({
+      ...item,
+      date: day.date
+    }))
+  );
 
-  let dayIndex = 1;
-  while (current <= end) {
-    const dateStr = current.toISOString().slice(0, 10); // YYYY-MM-DD
+  const foodKeywords = ['breakfast', 'lunch', 'dinner', 'brunch', 'hot dogs'];
+  const food = allItems.filter((item) =>
+    foodKeywords.some((word) => item.activity.toLowerCase().includes(word))
+  );
+  const events = allItems.filter(
+    (item) =>
+      !foodKeywords.some((word) => item.activity.toLowerCase().includes(word))
+  );
 
-    const baseActivities = getBaseActivitiesForDay(dayIndex, destination, constraints);
+  // Simple mock flights / hotels using user dates where possible
+  const flights = [
+    {
+      id: 1,
+      label: 'Inbound flight',
+      origin: origin || 'Your origin',
+      destination: destination || 'Los Angeles',
+      date: startDate || seed.daily_plans[0].date,
+      departTime: '07:00',
+      arriveTime: '10:15',
+      airline: 'Demo Air',
+      deepLink:
+        'https://www.google.com/travel/flights?q=flights+from+' +
+        encodeURIComponent(origin || 'JFK') +
+        '+to+' +
+        encodeURIComponent(destination || 'LAX') +
+        '+on+' +
+        (startDate || seed.daily_plans[0].date)
+    },
+    {
+      id: 2,
+      label: 'Return flight',
+      origin: destination || 'Los Angeles',
+      destination: origin || 'Your origin',
+      date: endDate || seed.daily_plans[seed.daily_plans.length - 1].date,
+      departTime: '13:30',
+      arriveTime: '21:45',
+      airline: 'Demo Air',
+      deepLink:
+        'https://www.google.com/travel/flights?q=flights+from+' +
+        encodeURIComponent(destination || 'LAX') +
+        '+to+' +
+        encodeURIComponent(origin || 'JFK') +
+        '+on+' +
+        (endDate || seed.daily_plans[seed.daily_plans.length - 1].date)
+    }
+  ];
 
-    days.push({
-      dayNumber: dayIndex,
-      date: dateStr,
-      activities: baseActivities,
-    });
-
-    current.setDate(current.getDate() + 1);
-    dayIndex++;
-  }
+  const hotels = [
+    {
+      name: 'West Hollywood Boutique Hotel',
+      area: 'West Hollywood',
+      rating: 4.6,
+      nights: 3,
+      pricePerNight: 320,
+      deepLink:
+        'https://www.booking.com/searchresults.html?ss=' +
+        encodeURIComponent('West Hollywood Los Angeles') +
+        '&checkin=' +
+        (startDate || seed.daily_plans[0].date) +
+        '&checkout=' +
+        (endDate || seed.daily_plans[seed.daily_plans.length - 1].date) +
+        '&group_adults=' +
+        (Number(people) || 2)
+    }
+  ];
 
   return {
     origin,
-    destination,
-    startDate,
-    endDate,
+    destination: destination || 'Los Angeles, CA',
+    startDate: startDate || seed.daily_plans[0].date,
+    endDate: endDate || seed.daily_plans[seed.daily_plans.length - 1].date,
     peopleLabel: people === '1' ? 'Solo traveler' : `${people} travelers`,
-    constraints: constraints.trim() || null,
+    constraints: constraints.trim() || 'Demo: pop-culture, music, and food-focused LA trip.',
     days,
+    tips: seed.tips,
+    flights,
+    hotels,
+    events,
+    food
   };
-}
-
-function getBaseActivitiesForDay(dayNumber, destination, constraints) {
-  const constraintNote = constraints
-    ? ` (while respecting: ${constraints.slice(0, 80)}${constraints.length > 80 ? '…' : ''})`
-    : '';
-
-  if (dayNumber === 1) {
-    return [
-      {
-        time: 'Morning',
-        title: `Arrival in ${destination}`,
-        note: 'Check in, drop bags, grab a light snack.',
-      },
-      {
-        time: 'Afternoon',
-        title: `Neighborhood walk in central ${destination}`,
-        note: 'Get oriented, find a local café.',
-      },
-      {
-        time: 'Evening',
-        title: 'Welcome dinner',
-        note: `Pick a highly rated spot that fits your constraints${constraintNote}.`,
-      },
-    ];
-  }
-
-  if (dayNumber === 2) {
-    return [
-      {
-        time: 'Morning',
-        title: 'Flagship attraction',
-        note: `Visit a must-see landmark or museum in ${destination}.`,
-      },
-      {
-        time: 'Afternoon',
-        title: 'Guided experience or tour',
-        note: 'Structured activity to cover local highlights.',
-      },
-      {
-        time: 'Evening',
-        title: 'Relaxed downtime',
-        note: `Explore a quieter area or park in ${destination}${constraintNote}.`,
-      },
-    ];
-  }
-
-  return [
-    {
-      time: 'Morning',
-      title: 'Local exploration',
-      note: `Try a neighborhood or district you haven’t seen in ${destination}.`,
-    },
-    {
-      time: 'Afternoon',
-      title: 'Activity block',
-      note: `Book something aligned with your preferences${constraintNote}.`,
-    },
-    {
-      time: 'Evening',
-      title: 'Dinner & recap',
-      note: 'Good restaurant + time to review the next day.',
-    },
-  ];
 }
 
 export default App;

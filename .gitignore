@@ -1,0 +1,21 @@
+# macOS system files
+.DS_Store
+
+# Node folders
+node_modules/
+frontend/node_modules/
+
+# Build output
+dist/
+build/
+
+# Cache
+.cache/
+frontend/node_modules/.cache/
+npm-debug.log*
+
+# OS junk
+Thumbs.db
+
+# React local dev files
+frontend/.DS_Store
