@@ -10,9 +10,8 @@ Your tasks (90 minutes total):
 Keep it simple - just make it work!
 """
 
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import Chroma
-from langchain_anthropic import ChatAnthropic
+# from langchain_anthropic import ChatAnthropic
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from typing import List, Dict, Any
 import json
@@ -30,9 +29,9 @@ class SimpleRAGService:
         """Initialize RAG components"""
         print("🚀 Initializing RAG service...")
         
-        api_key = os.getenv('OPENAI_API_KEY')
-        if not api_key:
-            raise ValueError("OPENAI_API_KEY not set!")
+        # api_key = os.getenv('OPENAI_API_KEY')
+        # if not api_key:
+        #     raise ValueError("OPENAI_API_KEY not set!")
         
         # Initialize embeddings
         # self.embeddings = OpenAIEmbeddings(
@@ -63,7 +62,7 @@ class SimpleRAGService:
             anthropic_api_key=os.getenv('ANTHROPIC_API_KEY')
         )
         
-        print("✅ RAG service initialized!")
+        print("RAG service initialized")
     
     def retrieve(self, query: str, city: str, k: int = 5) -> List[Dict]:
         """
@@ -88,7 +87,7 @@ class SimpleRAGService:
                 'metadata': doc.metadata
             })
         
-        print(f"✅ Found {len(docs)} relevant documents")
+        print(f"Found {len(docs)} relevant documents")
         return docs
     
     def generate_itinerary(self, city: str, start_date: str, end_date: str, 

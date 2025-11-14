@@ -335,37 +335,31 @@ def format_for_vector_store(city_data, city_name):
         })
     
     return documents
-
 def index_mock_data():
     """Index all mock data into vector store"""
     print("🚀 Starting to index mock data...")
     
-    # Import here to avoid issues if not installed yet
     try:
         from langchain_community.vectorstores import Chroma
         from langchain_community.embeddings import HuggingFaceEmbeddings
-
-        embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
     except ImportError:
         print("❌ Missing dependencies. Run: pip install langchain-community sentence-transformers chromadb")
         return
     
-    
-    # Initialize embeddings
-    # embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
     
     # Collect all documents
     all_documents = []
     for city_name, city_data in MOCK_DATA.items():
         docs = format_for_vector_store(city_data, city_name.title())
         all_documents.extend(docs)
-        print(f"  📍 Formatted {len(docs)} documents for {city_name.title()}")
+        print(f"📍 Formatted {len(docs)} documents for {city_name.title()}")
     
     print(f"\n📦 Total documents to index: {len(all_documents)}")
     
     # Create vector store
-    texts = [doc['text'] for doc in all_documents]
-    metadatas = [doc['metadata'] for doc in all_documents]
+    texts = [doc["text"] for doc in all_documents]
+    metadatas = [doc["metadata"] for doc in all_documents]
     
     vector_store = Chroma.from_texts(
         texts=texts,
@@ -376,14 +370,21 @@ def index_mock_data():
     )
     
     print("✅ Successfully indexed all mock data into Chroma!")
-    print(f"📊 Vector store location: ./chroma_db")
+    print("📊 Vector store location: ./chroma_db")
     
-    # Test retrieval
+    # 🔍 Test retrieval and PRINT REAL RESULTS
     print("\n🧪 Testing retrieval...")
-    results = vector_store.similarity_search("best restaurants in Paris", k=3)
-    print(f"✅ Retrieved {len(results)} results for test query")
-    if results:
-        print(f"   Top result: {results[0].metadata.get('name', 'N/A')}")
+    results = vector_store.similarity_search(
+        "Paris restaurant French bistro",
+        k=3
+    )
+    print(f"✅ Retrieved {len(results)} results for test query\n")
+    for i, doc in enumerate(results, start=1):
+        print(f"{i}. {doc.metadata.get('name', 'N/A')} ({doc.metadata.get('city')})")
+        print(doc.page_content[:200].replace("\n", " ") + "...")
+        print("-" * 40)
+
+
 
 if __name__ == '__main__':
     print("=" * 50)
